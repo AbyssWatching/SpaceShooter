@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -37,7 +38,39 @@ public class Enemy : MonoBehaviour
     {
 
 
-        transform.position = new Vector3((Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn)), topOfScreen, 0.0f);
+        transform.position = new Vector3((UnityEngine.Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn)), topOfScreen, 0.0f);
+
+
+    }
+
+	private void OnTriggerEnter(Collider other)
+	{
+        Debug.Log(other.tag + " was hit");
+
+        if (other.tag == "Laser")
+        {
+            Destroy(other.gameObject);
+
+            Destroy(gameObject);
+        }
+        else if (other.tag == "Player")
+        {
+            Player player = other.transform.GetComponent<Player>();
+            Debug.Log("able to ge component :" + other.name);
+
+            if (player != null)
+            {
+                player.Damage();
+                Debug.Log("was able to damage");
+            }
+
+            Destroy(gameObject);
+
+        }
+
+
+
+
 
 
     }

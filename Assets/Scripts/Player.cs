@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject LaserPrefab;
     [SerializeField] private float _firerate = 0.5f;
     [SerializeField] private float _canFire = -1f;
+    [SerializeField] private int _lives = 3;
      private float negativeXLimit = -9f;
      private float justInNegativeLimit = -8.9f;
      private float positiveXLimit = 9f;
@@ -78,6 +79,17 @@ public class Player : MonoBehaviour
 
 		_canFire = _firerate + Time.time;
 		
+    }
+
+    [ContextMenu ("Damage")]
+    public void Damage()
+    {
+        _lives--;
+
+        if (_lives <= 0)
+        {
+            Destroy(gameObject); 
+        }
     }
 }
 
