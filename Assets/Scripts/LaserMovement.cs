@@ -16,7 +16,7 @@ public class LaserMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+       void Update()
     {
         //it's a laser it's going straight up
         transform.Translate(transform.up * _speed * Time.deltaTime);

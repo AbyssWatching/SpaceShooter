@@ -68,7 +68,7 @@ public class Player : MonoBehaviour
             transform.position = new Vector3(justInNegativeLimit,transform.position.y,0f);
         }
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,-3f,1f),0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,negativeYLimit, positveYLimit),0);
 
 } 
      
