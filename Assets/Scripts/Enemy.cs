@@ -20,10 +20,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y <= bottomOfScreen) 
-        {
-            ResetEnemyPosition();
-        }
+        
+        ResetEnemyPosition();
+        
 
         Movement();
     }
@@ -35,6 +34,14 @@ public class Enemy : MonoBehaviour
 	}
 
     void ResetEnemyPosition() 
+    {
+		if (transform.position.y <= bottomOfScreen)
+		{
+			RespawnEnemy();
+		}
+	}
+
+    public void RespawnEnemy() 
     {
 
 

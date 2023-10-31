@@ -12,13 +12,13 @@ public class Player : MonoBehaviour
     [SerializeField] private float _firerate = 0.5f;
     [SerializeField] private float _canFire = -1f;
     [SerializeField] private int _lives = 3;
-     private float negativeXLimit = -9f;
-     private float justInNegativeLimit = -8.9f;
-     private float positiveXLimit = 9f;
-     private float justInPositiveLimit = 8.9f;
-     private float negativeYLimit = -3;
-     private float positveYLimit = 1;
-     private float _speed = 8f;
+    private float negativeXLimit = -9f;
+    private float justInNegativeLimit = -8.9f;
+    private float positiveXLimit = 9f;
+    private float justInPositiveLimit = 8.9f;
+    private float negativeYLimit = -3;
+    private float positveYLimit = 1;
+    private float _speed = 8f;
 
 
 
@@ -37,14 +37,14 @@ public class Player : MonoBehaviour
     {
       Movement();
 
-      if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+    if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
       {
             FireLaser();
       }
 
     }
 
-     void Movement()
+     private void Movement()
      {
 
         float horizontalInput = Input.GetAxisRaw(HORIZONTAL);
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,-3f,1f),0);
 
-     } 
+} 
      
     void FireLaser() 
     { 
@@ -90,7 +90,7 @@ public class Player : MonoBehaviour
         {
             Destroy(gameObject); 
         }
-    }
+     } 
 }
 
 
