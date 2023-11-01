@@ -6,14 +6,21 @@ public class Spawnmanager : MonoBehaviour
 {
 
     [SerializeField] private GameObject enemy;
-    [SerializeField] private GameObject enemyContainer;
-    [SerializeField] private int time = 3;
+    [SerializeField] GameObject enemyContainer;
+    [SerializeField] private int minTime = 3;
+    [SerializeField] private int maxTime = 7;
+    [SerializeField] private GameObject tripplePowerUp;
+    
 	private float maxMinimalXrangeforSPawn = -10.0f;
 	private float maxMaximalXrangeForSpawn = 10.0f;
+
+    private bool _stopSpawning = false;
 	// Start is called before the first frame update
 	void Start()
     {
         StartCoroutine(SpawnRoutine());
+        StartCoroutine(PowerUpRoutine());
+
     }
 
     // Update is called once per frame
@@ -24,7 +31,7 @@ public class Spawnmanager : MonoBehaviour
 
     IEnumerator SpawnRoutine()
     {
-        while (true)
+        while (_stopSpawning == false)
         {
             
            GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
@@ -33,7 +40,22 @@ public class Spawnmanager : MonoBehaviour
 
 
 
-            yield return new WaitForSeconds(time);
+            yield return new WaitForSeconds(minTime);
         }
     }
+
+    IEnumerator PowerUpRoutine()
+    {
+        while(_stopSpawning == false){
+        Instantiate(tripplePowerUp, new Vector3(Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
+
+        yield return new WaitForSeconds(Random.Range(minTime,maxTime));
+        }
+    }
+    public void OnPlayerDeath()
+    {
+        _stopSpawning = true;
+    }
+
+
 }

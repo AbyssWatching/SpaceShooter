@@ -50,17 +50,17 @@ public class Enemy : MonoBehaviour
 
     }
 
-	private void OnTriggerEnter(Collider other)
+	private void OnTriggerEnter2D(Collider2D other)
 	{
         Debug.Log(other.tag + " was hit");
 
-        if (other.tag == "Laser")
+        if (other.CompareTag("Laser"))
         {
             Destroy(other.gameObject);
 
             Destroy(gameObject);
         }
-        else if (other.tag == "Player")
+        else if (other.CompareTag("Player"))
         {
             Player player = other.transform.GetComponent<Player>();
             Debug.Log("able to ge component :" + other.name);
@@ -70,15 +70,11 @@ public class Enemy : MonoBehaviour
                 player.Damage();
                 Debug.Log("was able to damage");
             }
+            else
+            {Debug.LogError("Enemy script has a null player ref check ontriggerEnter method first.");}
 
             Destroy(gameObject);
 
         }
-
-
-
-
-
-
     }
 }

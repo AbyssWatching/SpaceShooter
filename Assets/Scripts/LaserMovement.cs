@@ -30,6 +30,10 @@ public class LaserMovement : MonoBehaviour
 	{
         if (transform.position.y >= topOfTHeScreen)
         {
+            if (this.transform.parent != null)
+            {
+                Destroy(this.transform.parent.gameObject);
+            }
             Destroy(this.gameObject);
         }
     }
