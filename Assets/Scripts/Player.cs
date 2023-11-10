@@ -109,6 +109,13 @@ public class Player : MonoBehaviour
         }
      } 
 
+     public void ActivateSpeedBoost()
+     {
+        _speed = 12;
+
+
+     }
+
      public void ActivateTrippleShot()
      {
         activeTrippleShot = true;

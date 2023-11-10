@@ -5,7 +5,11 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField] private int _speed = 5;
+
     private int bottomOfScreen = -7;
+
+
+    [SerializeField] private int PowerUpID;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +40,18 @@ public class PowerUp : MonoBehaviour
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
-                player.ActivateTrippleShot();
+                switch (PowerUpID)
+                {
+                    case 0:
+                        player.ActivateTrippleShot();
+                        break;
+                    case 1:
+                        break;
+                    case 2: 
+                        break;
+                    default:
+                        break;
+                }
             }
             else{
                 Debug.LogError("Issue in Powerup script check onTriggerEnter method first player ref null");
