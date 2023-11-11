@@ -22,7 +22,9 @@ public class Player : MonoBehaviour
     private float justInPositiveLimit = 8.9f;
     private float negativeYLimit = -3;
     private float positveYLimit = 1;
-    [SerializeField] private float _speed = 8f;
+    [SerializeField] private float _speed = 8;
+    [SerializeField] private float _defaultSpeed = 8;
+    [SerializeField] private float _speedBoostSpeed = 12;
 
 
 
@@ -111,10 +113,14 @@ public class Player : MonoBehaviour
 
      public void ActivateSpeedBoost()
      {
-        _speed = 12;
-
-
+        _speed = _speedBoostSpeed;
      }
+
+     public IEnumerator DeactivateSpeedBoost() 
+    {
+        yield return new WaitForSeconds(timerForPowerUps);
+        _speed = _defaultSpeed;
+    }
 
      public void ActivateTrippleShot()
      {
