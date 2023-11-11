@@ -8,25 +8,26 @@ public class Player : MonoBehaviour
     private const string HORIZONTAL = "Horizontal";
     private const string VERTICAL = "Vertical";
 
-    [SerializeField] private GameObject LaserPrefab;
+    [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private float _firerate = 0.5f;
     private float _canFire = -1f;
     [SerializeField] private int _lives = 3;
-    [SerializeField] private GameObject tripleShotPowerUp;
+    [SerializeField] private GameObject _tripleShotPowerUp;
+    [SerializeField] private GameObject _shieldVisual;
     [SerializeField] private bool _activeTrippleShot = false;
     [SerializeField] private bool _activeSpeedBoost = false;
     [SerializeField] private bool _activeShieldPowerUp = false;
-    [SerializeField] private int timerForPowerUps = 5;
+    [SerializeField] private int _timerForPowerUps = 5;
     private Spawnmanager _spawnmanager;
-    private float negativeXLimit = -9f;
-    private float justInNegativeLimit = -8.9f;
-    private float positiveXLimit = 9f;
-    private float justInPositiveLimit = 8.9f;
-    private float negativeYLimit = -3;
-    private float positveYLimit = 1;
+    private float _negativeXLimit = -9f;
+    private float _justInNegativeLimit = -8.9f;
+    private float _positiveXLimit = 9f;
+    private float _justInPositiveLimit = 8.9f;
+    private float _negativeYLimit = -3;
+    private float _positveYLimit = 1;
     [SerializeField] private float _speed = 8;
-    [SerializeField] private float _defaultSpeed = 8;
-    [SerializeField] private float _speedBoostSpeed = 16;
+    private float _defaultSpeed = 8;
+    private float _speedBoostSpeed = 16;
 
 
 
@@ -73,16 +74,16 @@ public class Player : MonoBehaviour
 
         //if this.position >= 9    then this.position == -8.9
 
-        if(this.transform.position.x <= negativeXLimit)
+        if(this.transform.position.x <= _negativeXLimit)
         {
-            transform.position = new Vector3(justInPositiveLimit,transform.position.y,0f);
+            transform.position = new Vector3(_justInPositiveLimit,transform.position.y,0f);
         }
-        if (this.transform.position.x >= positiveXLimit)
+        if (this.transform.position.x >= _positiveXLimit)
         {
-            transform.position = new Vector3(justInNegativeLimit,transform.position.y,0f);
+            transform.position = new Vector3(_justInNegativeLimit,transform.position.y,0f);
         }
 
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,negativeYLimit, positveYLimit),0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,_negativeYLimit, _positveYLimit),0);
 
 } 
      
@@ -90,11 +91,11 @@ public class Player : MonoBehaviour
     { 
         if (_activeTrippleShot == false)
         {
-            Instantiate(LaserPrefab, (this.transform.position + new Vector3(0, 1.1f, 0)), Quaternion.identity);
+            Instantiate(_laserPrefab, (this.transform.position + new Vector3(0, 1.1f, 0)), Quaternion.identity);
         }
         else
         {
-            Instantiate(tripleShotPowerUp, (this.transform.position + new Vector3(-.4f, .9f, 0)), Quaternion.identity);
+            Instantiate(_tripleShotPowerUp, (this.transform.position + new Vector3(-.4f, .9f, 0)), Quaternion.identity);
         }
 
 		_canFire = _firerate + Time.time;
@@ -138,7 +139,7 @@ public class Player : MonoBehaviour
 
      public IEnumerator DeactivateSpeedBoost() 
     {
-        yield return new WaitForSeconds(timerForPowerUps);
+        yield return new WaitForSeconds(_timerForPowerUps);
         _speed = _defaultSpeed;
         _activeSpeedBoost = false;
     }
@@ -147,14 +148,17 @@ public class Player : MonoBehaviour
     {
         _activeShieldPowerUp = true;
 
+        _shieldVisual.SetActive(true);
+
         StartCoroutine(DeactivateShields());
 
     }
 
     private IEnumerator DeactivateShields()
     {
-        yield return new WaitForSeconds(timerForPowerUps);
+        yield return new WaitForSeconds(_timerForPowerUps);
         _activeShieldPowerUp = false;
+        _shieldVisual.SetActive(false);
     }
 
      public void ActivateTrippleShot()
@@ -166,7 +170,7 @@ public class Player : MonoBehaviour
 
      private IEnumerator DeactivateTrippleShot()
      {
-        yield return new WaitForSeconds(timerForPowerUps);
+        yield return new WaitForSeconds(_timerForPowerUps);
         _activeTrippleShot = false;
      }
 }
