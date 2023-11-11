@@ -317,8 +317,11 @@ MonoBehaviour:
   _lives: 3
   tripleShotPowerUp: {fileID: 2021042364579206028, guid: 8759b73ffa256ca4eb3c15cbf9fe37f4, type: 3}
   activeTrippleShot: 0
+  activateSpeedBoost: 0
   timerForPowerUps: 5
   _speed: 8
+  _defaultSpeed: 8
+  _speedBoostSpeed: 16
 --- !u!212 &942788214
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -973,7 +976,9 @@ MonoBehaviour:
   enemyContainer: {fileID: 419782522}
   minTime: 3
   maxTime: 7
-  tripplePowerUp: {fileID: 2688622575290062363, guid: 7c42936a144a1b243a57afecd38743f3, type: 3}
+  powerUps:
+  - {fileID: 2688622575290062363, guid: 7c42936a144a1b243a57afecd38743f3, type: 3}
+  - {fileID: 2480803950319993150, guid: b13c758b692ef1540a202a2667d1d0a7, type: 3}
 --- !u!4 &2107973010
 Transform:
   m_ObjectHideFlags: 0

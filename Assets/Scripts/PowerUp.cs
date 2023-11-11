@@ -46,8 +46,10 @@ public class PowerUp : MonoBehaviour
                         player.ActivateTrippleShot();
                         break;
                     case 1:
+                        player.ActivateSpeedBoost();
                         break;
                     case 2: 
+                        player.ActivateShieldPowerUp();
                         break;
                     default:
                         break;

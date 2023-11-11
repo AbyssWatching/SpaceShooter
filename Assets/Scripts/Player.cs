@@ -13,7 +13,9 @@ public class Player : MonoBehaviour
     private float _canFire = -1f;
     [SerializeField] private int _lives = 3;
     [SerializeField] private GameObject tripleShotPowerUp;
-    [SerializeField] private bool activeTrippleShot = false;
+    [SerializeField] private bool _activeTrippleShot = false;
+    [SerializeField] private bool _activeSpeedBoost = false;
+    [SerializeField] private bool _activeShieldPowerUp = false;
     [SerializeField] private int timerForPowerUps = 5;
     private Spawnmanager _spawnmanager;
     private float negativeXLimit = -9f;
@@ -24,7 +26,7 @@ public class Player : MonoBehaviour
     private float positveYLimit = 1;
     [SerializeField] private float _speed = 8;
     [SerializeField] private float _defaultSpeed = 8;
-    [SerializeField] private float _speedBoostSpeed = 12;
+    [SerializeField] private float _speedBoostSpeed = 16;
 
 
 
@@ -86,13 +88,13 @@ public class Player : MonoBehaviour
      
     void FireLaser() 
     { 
-        if (activeTrippleShot == true)
+        if (_activeTrippleShot == false)
         {
-            Instantiate(tripleShotPowerUp, (this.transform.position + new Vector3(-.4f, .9f, 0)), Quaternion.identity);
+            Instantiate(LaserPrefab, (this.transform.position + new Vector3(0, 1.1f, 0)), Quaternion.identity);
         }
         else
         {
-            Instantiate(LaserPrefab, (this.transform.position + new Vector3(0, 1.1f, 0)), Quaternion.identity);
+            Instantiate(tripleShotPowerUp, (this.transform.position + new Vector3(-.4f, .9f, 0)), Quaternion.identity);
         }
 
 		_canFire = _firerate + Time.time;
@@ -102,29 +104,62 @@ public class Player : MonoBehaviour
     [ContextMenu ("Damage")]
     public void Damage()
     {
-        _lives--;
-
-        if (_lives <= 0)
+        if (_activeShieldPowerUp == true)
         {
-            Destroy(gameObject); 
-            _spawnmanager.OnPlayerDeath();
+            //shield power up is up so no dying for now hahaha!
+        }else
+        {
+            _lives--;
+
+            if (_lives <= 0)
+            {
+                Destroy(gameObject); 
+                _spawnmanager.OnPlayerDeath();
+            }
         }
+      
      } 
 
+     public void SpeedBoostSecret()
+     {
+        if (_activeSpeedBoost == true)
+        {
+            ActivateSpeedBoost();
+        } 
+     }
+
+     [ContextMenu ("speedBoost")]
      public void ActivateSpeedBoost()
      {
         _speed = _speedBoostSpeed;
+
+        StartCoroutine(DeactivateSpeedBoost());
      }
 
      public IEnumerator DeactivateSpeedBoost() 
     {
         yield return new WaitForSeconds(timerForPowerUps);
         _speed = _defaultSpeed;
+        _activeSpeedBoost = false;
+    }
+
+    public void ActivateShieldPowerUp()
+    {
+        _activeShieldPowerUp = true;
+
+        StartCoroutine(DeactivateShields());
+
+    }
+
+    private IEnumerator DeactivateShields()
+    {
+        yield return new WaitForSeconds(timerForPowerUps);
+        _activeShieldPowerUp = false;
     }
 
      public void ActivateTrippleShot()
      {
-        activeTrippleShot = true;
+        _activeTrippleShot = true;
 
         StartCoroutine(DeactivateTrippleShot());
      }
@@ -132,7 +167,7 @@ public class Player : MonoBehaviour
      private IEnumerator DeactivateTrippleShot()
      {
         yield return new WaitForSeconds(timerForPowerUps);
-        activeTrippleShot = false;
+        _activeTrippleShot = false;
      }
 }
 

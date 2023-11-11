@@ -9,7 +9,7 @@ public class Spawnmanager : MonoBehaviour
     [SerializeField] GameObject enemyContainer;
     [SerializeField] private int minTime = 3;
     [SerializeField] private int maxTime = 7;
-    [SerializeField] private GameObject tripplePowerUp;
+    [SerializeField] private GameObject[] powerUps;
     
 	private float maxMinimalXrangeforSPawn = -10.0f;
 	private float maxMaximalXrangeForSpawn = 10.0f;
@@ -47,7 +47,9 @@ public class Spawnmanager : MonoBehaviour
     IEnumerator PowerUpRoutine()
     {
         while(_stopSpawning == false){
-        Instantiate(tripplePowerUp, new Vector3(Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
+
+        int randomPowerUp = (int)Random.Range(0,3);
+       Instantiate(powerUps[randomPowerUp], new Vector3(Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
 
         yield return new WaitForSeconds(Random.Range(minTime,maxTime));
         }
