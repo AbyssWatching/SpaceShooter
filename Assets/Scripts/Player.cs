@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     [SerializeField] private bool _activeSpeedBoost = false;
     [SerializeField] private bool _activeShieldPowerUp = false;
     [SerializeField] private int _timerForPowerUps = 5;
+    [SerializeField] private int _score = 0;
     private Spawnmanager _spawnmanager;
     private float _negativeXLimit = -9f;
     private float _justInNegativeLimit = -8.9f;
@@ -172,6 +173,11 @@ public class Player : MonoBehaviour
      {
         yield return new WaitForSeconds(_timerForPowerUps);
         _activeTrippleShot = false;
+     }
+
+     public void Scored(int points)
+     {
+        _score += points;
      }
 }
 

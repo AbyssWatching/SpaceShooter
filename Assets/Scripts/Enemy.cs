@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
 
     [SerializeField] private int _speed = 5;
+    private Player _player;
     private int bottomOfScreen = -7;
     private float topOfScreen = 8.0f;
     private float maxMinimalXrangeforSPawn = -10.0f;
@@ -14,7 +15,12 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        _player = GameObject.Find("Player").GetComponent<Player>();
+
+         if (_player == null)
+        {
+            Debug.LogError("_Player is null in Enemy Script, Thx!");
+        }
     }
 
     // Update is called once per frame
@@ -56,6 +62,11 @@ public class Enemy : MonoBehaviour
 
         if (other.CompareTag("Laser"))
         {
+           if (_player != null)
+           {
+            _player.Scored(10);
+           }
+
             Destroy(other.gameObject);
 
             Destroy(gameObject);
