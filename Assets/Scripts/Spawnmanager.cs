@@ -5,14 +5,14 @@ using UnityEngine;
 public class Spawnmanager : MonoBehaviour
 {
 
-    [SerializeField] private GameObject enemy;
-    [SerializeField] GameObject enemyContainer;
-    [SerializeField] private int minTime = 3;
-    [SerializeField] private int maxTime = 7;
-    [SerializeField] private GameObject[] powerUps;
+    [SerializeField] private GameObject _enemy;
+    [SerializeField] GameObject _enemyContainer;
+    [SerializeField] private int _minTime = 3;
+    [SerializeField] private int _maxTime = 7;
+    [SerializeField] private GameObject[] _powerUps;
     
-	private float maxMinimalXrangeforSPawn = -10.0f;
-	private float maxMaximalXrangeForSpawn = 10.0f;
+	private float _maxMinimalXrangeforSPawn = -10.0f;
+	private float _maxMaximalXrangeForSpawn = 10.0f;
 
     private bool _stopSpawning = false;
 	// Start is called before the first frame update
@@ -28,32 +28,33 @@ public class Spawnmanager : MonoBehaviour
     {
         
     }
-
+    //spawn routine for enemies
     IEnumerator SpawnRoutine()
     {
         while (_stopSpawning == false)
         {
             
-           GameObject newEnemy = Instantiate(enemy, new Vector3(Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
+           GameObject newEnemy = Instantiate(_enemy, new Vector3(Random.Range(_maxMinimalXrangeforSPawn, _maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
 
-           newEnemy.transform.parent = enemyContainer.transform;
+           newEnemy.transform.parent = _enemyContainer.transform;
 
 
 
-            yield return new WaitForSeconds(minTime);
+            yield return new WaitForSeconds(_minTime);
         }
     }
-
+    //spawning of powerups
     IEnumerator PowerUpRoutine()
     {
         while(_stopSpawning == false){
 
         int randomPowerUp = (int)Random.Range(0,3);
-       Instantiate(powerUps[randomPowerUp], new Vector3(Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
+       Instantiate(_powerUps[randomPowerUp], new Vector3(Random.Range(_maxMinimalXrangeforSPawn, _maxMaximalXrangeForSpawn), 8, 0), Quaternion.identity);
 
-        yield return new WaitForSeconds(Random.Range(minTime,maxTime));
+        yield return new WaitForSeconds(Random.Range(_minTime,_maxTime));
         }
     }
+    //prevents spawning of new GO
     public void OnPlayerDeath()
     {
         _stopSpawning = true;

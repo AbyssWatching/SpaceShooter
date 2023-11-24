@@ -8,10 +8,10 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private int _speed = 5;
     private Player _player;
-    private int bottomOfScreen = -7;
-    private float topOfScreen = 8.0f;
-    private float maxMinimalXrangeforSPawn = -10.0f;
-    private float maxMaximalXrangeForSpawn  = 10.0f;
+    private int _bottomOfScreen = -7;
+    private float _topOfScreen = 8.0f;
+    private float _maxMinimalXrangeforSPawn = -10.0f;
+    private float _maxMaximalXrangeForSpawn  = 10.0f;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
 
     void ResetEnemyPosition() 
     {
-		if (transform.position.y <= bottomOfScreen)
+		if (transform.position.y <= _bottomOfScreen)
 		{
 			RespawnEnemy();
 		}
@@ -51,7 +51,7 @@ public class Enemy : MonoBehaviour
     {
 
 
-        transform.position = new Vector3((UnityEngine.Random.Range(maxMinimalXrangeforSPawn, maxMaximalXrangeForSpawn)), topOfScreen, 0.0f);
+        transform.position = new Vector3((UnityEngine.Random.Range(_maxMinimalXrangeforSPawn, _maxMaximalXrangeForSpawn)), _topOfScreen, 0.0f);
 
 
     }

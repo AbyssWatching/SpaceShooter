@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject _laserPrefab;
     [SerializeField] private float _firerate = 0.5f;
     private float _canFire = -1f;
+    private UIManager _manager;
     [SerializeField] private int _lives = 3;
     [SerializeField] private GameObject _tripleShotPowerUp;
     [SerializeField] private GameObject _shieldVisual;
@@ -34,15 +35,22 @@ public class Player : MonoBehaviour
 
     void Start()
     {
-
+        //null check and finding scripts
         _spawnmanager = GameObject.Find("SpawnManager").GetComponent<Spawnmanager>();
 
         if (_spawnmanager == null)
         {
             Debug.LogError("Spawnmanager is null in Player Script, Thx!");
         }
-        //made default position
 
+        _manager = GameObject.Find("Canvas").GetComponent<UIManager>();
+
+        if (_manager == null)
+        {
+            Debug.LogError("Canvas couldn't be found");
+        }
+
+        //making default position of main character
         this.transform.position = new Vector3(0f,-3.14f,0f);
 
 
@@ -53,6 +61,7 @@ public class Player : MonoBehaviour
     {
       Movement();
 
+        //firerate
     if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
       {
             FireLaser();
@@ -103,11 +112,13 @@ public class Player : MonoBehaviour
 		
     }
 
+    //method for if damage is taken by player
     [ContextMenu ("Damage")]
     public void Damage()
     {
         if (_activeShieldPowerUp == true)
         {
+            Scored(10);
             //shield power up is up so no dying for now hahaha!
         }else
         {
@@ -129,7 +140,7 @@ public class Player : MonoBehaviour
             ActivateSpeedBoost();
         } 
      }
-
+    //speed boost power up activation
      [ContextMenu ("speedBoost")]
      public void ActivateSpeedBoost()
      {
@@ -144,7 +155,7 @@ public class Player : MonoBehaviour
         _speed = _defaultSpeed;
         _activeSpeedBoost = false;
     }
-
+    //shield power up activation
     public void ActivateShieldPowerUp()
     {
         _activeShieldPowerUp = true;
@@ -174,10 +185,12 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_timerForPowerUps);
         _activeTrippleShot = false;
      }
-
+    //scoring logic, is used by enemies
      public void Scored(int points)
      {
         _score += points;
+
+        _manager.updateScore(_score);
      }
 }
 

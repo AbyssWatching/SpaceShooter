@@ -8,7 +8,7 @@ public class LaserMovement : MonoBehaviour
 {
 
     [SerializeField] private int _speed = 5;
-    [SerializeField] private int topOfTHeScreen = 8;
+    [SerializeField] private int _topOfTHeScreen = 8;
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +28,7 @@ public class LaserMovement : MonoBehaviour
     //destroys laser if it passes the specified y location
 	private void DestroyLaser()
 	{
-        if (transform.position.y >= topOfTHeScreen)
+        if (transform.position.y >= _topOfTHeScreen)
         {
             if (this.transform.parent != null)
             {

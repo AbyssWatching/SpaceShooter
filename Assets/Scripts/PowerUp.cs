@@ -6,7 +6,7 @@ public class PowerUp : MonoBehaviour
 {
     [SerializeField] private int _speed = 5;
 
-    private int bottomOfScreen = -7;
+    private int _bottomOfScreen = -7;
 
 
     [SerializeField] private int PowerUpID;
@@ -28,7 +28,7 @@ public class PowerUp : MonoBehaviour
 
     private void endOfTheLine()
     {
-        if (transform.position.y <= bottomOfScreen)
+        if (transform.position.y <= _bottomOfScreen)
 		{
 			Destroy(this.gameObject);
 		}
