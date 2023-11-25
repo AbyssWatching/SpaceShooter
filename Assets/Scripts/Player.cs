@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         }
 
         _manager = GameObject.Find("Canvas").GetComponent<UIManager>();
-
+        
         if (_manager == null)
         {
             Debug.LogError("Canvas couldn't be found");
@@ -124,6 +124,8 @@ public class Player : MonoBehaviour
         {
             _lives--;
 
+            _manager.updateLives(_lives);
+
             if (_lives <= 0)
             {
                 Destroy(gameObject); 
@@ -185,7 +187,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_timerForPowerUps);
         _activeTrippleShot = false;
      }
-    //scoring logic, is used by enemies
+    //scoring logic, is  enemies
      public void Scored(int points)
      {
         _score += points;
