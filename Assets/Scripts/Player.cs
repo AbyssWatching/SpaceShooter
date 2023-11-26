@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 8;
     private float _defaultSpeed = 8;
     private float _speedBoostSpeed = 16;
+    private bool _gameOver = false;
 
 
 
@@ -66,6 +68,10 @@ public class Player : MonoBehaviour
       {
             FireLaser();
       }
+    if (Input.GetKeyDown(KeyCode.R) && (_gameOver == true))
+    {
+        SceneManager.LoadScene("SpaceShooterGame");
+    }
 
     }
 
@@ -128,6 +134,7 @@ public class Player : MonoBehaviour
 
             if (_lives <= 0)
             {
+                _gameOver = true;
                 Destroy(gameObject); 
                 _spawnmanager.OnPlayerDeath();
             }
