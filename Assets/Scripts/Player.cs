@@ -10,30 +10,28 @@ public class Player : MonoBehaviour
     private const string VERTICAL = "Vertical";
 
     [SerializeField] private GameObject _laserPrefab;
-    [SerializeField] private float _firerate = 0.5f;
-    private float _canFire = -1f;
-    private UIManager _manager;
-    [SerializeField] private int _lives = 3;
+
     [SerializeField] private GameObject _tripleShotPowerUp;
     [SerializeField] private GameObject _shieldVisual;
+    [SerializeField] private float _firerate = 0.5f;
+    [SerializeField] private int _lives = 3;
     [SerializeField] private bool _activeTrippleShot = false;
     [SerializeField] private bool _activeSpeedBoost = false;
     [SerializeField] private bool _activeShieldPowerUp = false;
     [SerializeField] private int _timerForPowerUps = 5;
     [SerializeField] private int _score = 0;
+    [SerializeField] private float _speed = 8;
+    private UIManager _manager;
     private Spawnmanager _spawnmanager;
+    private float _canFire = -1f;
     private float _negativeXLimit = -9f;
     private float _justInNegativeLimit = -8.9f;
     private float _positiveXLimit = 9f;
     private float _justInPositiveLimit = 8.9f;
     private float _negativeYLimit = -3;
     private float _positveYLimit = 1;
-    [SerializeField] private float _speed = 8;
     private float _defaultSpeed = 8;
     private float _speedBoostSpeed = 16;
-    private bool _gameOver = false;
-
-
 
     void Start()
     {
@@ -58,7 +56,6 @@ public class Player : MonoBehaviour
 
     }
 
-    // Update is called once per frame
     void Update()
     {
       Movement();
@@ -68,11 +65,6 @@ public class Player : MonoBehaviour
       {
             FireLaser();
       }
-    if (Input.GetKeyDown(KeyCode.R) && (_gameOver == true))
-    {
-        SceneManager.LoadScene("SpaceShooterGame");
-    }
-
     }
 
      private void Movement()
@@ -88,8 +80,6 @@ public class Player : MonoBehaviour
 
         transform.Translate(direction * Time.deltaTime * _speed);
 
-        //if this.position >= 9    then this.position == -8.9
-
         if(this.transform.position.x <= _negativeXLimit)
         {
             transform.position = new Vector3(_justInPositiveLimit,transform.position.y,0f);
@@ -102,7 +92,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,_negativeYLimit, _positveYLimit),0);
 
 } 
-     
+     //laser fire to include powerup
     void FireLaser() 
     { 
         if (_activeTrippleShot == false)
@@ -134,7 +124,6 @@ public class Player : MonoBehaviour
 
             if (_lives <= 0)
             {
-                _gameOver = true;
                 Destroy(gameObject); 
                 _spawnmanager.OnPlayerDeath();
             }

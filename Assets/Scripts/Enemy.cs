@@ -47,19 +47,14 @@ public class Enemy : MonoBehaviour
 		}
 	}
 
+    //respawns them back to the top
     public void RespawnEnemy() 
     {
-
-
         transform.position = new Vector3((UnityEngine.Random.Range(_maxMinimalXrangeforSPawn, _maxMaximalXrangeForSpawn)), _topOfScreen, 0.0f);
-
-
     }
 
 	private void OnTriggerEnter2D(Collider2D other)
 	{
-        Debug.Log(other.tag + " was hit");
-
         if (other.CompareTag("Laser"))
         {
            if (_player != null)
@@ -74,12 +69,9 @@ public class Enemy : MonoBehaviour
         else if (other.CompareTag("Player"))
         {
             Player player = other.transform.GetComponent<Player>();
-            Debug.Log("able to ge component :" + other.name);
-
             if (player != null)
             {
                 player.Damage();
-                Debug.Log("was able to damage");
             }
             else
             {Debug.LogError("Enemy script has a null player ref check ontriggerEnter method first.");}

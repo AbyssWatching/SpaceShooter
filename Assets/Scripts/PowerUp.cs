@@ -5,16 +5,8 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField] private int _speed = 5;
-
-    private int _bottomOfScreen = -7;
-
-
     [SerializeField] private int PowerUpID;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private int _bottomOfScreen = -7;
 
     // Update is called once per frame
     void Update()
@@ -25,7 +17,7 @@ public class PowerUp : MonoBehaviour
 
 
     }
-
+    //resets position of powerups
     private void endOfTheLine()
     {
         if (transform.position.y <= _bottomOfScreen)
@@ -33,7 +25,7 @@ public class PowerUp : MonoBehaviour
 			Destroy(this.gameObject);
 		}
     }
-
+    //decides which power up to use
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player"))
         {
