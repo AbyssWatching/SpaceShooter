@@ -11,7 +11,7 @@ public class PowerUp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position += Vector3.down * Time.deltaTime * _speed;
+        Movement();
 
         endOfTheLine();
 
@@ -24,6 +24,11 @@ public class PowerUp : MonoBehaviour
 		{
 			Destroy(this.gameObject);
 		}
+    }
+
+    private void Movement()
+    {
+        transform.position += Vector3.down * Time.deltaTime * _speed;
     }
     //decides which power up to use
     private void OnTriggerEnter2D(Collider2D other) {

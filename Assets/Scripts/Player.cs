@@ -23,6 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 8;
     private UIManager _manager;
     private Spawnmanager _spawnmanager;
+    private GameManager _gameManager;
     private float _canFire = -1f;
     private float _negativeXLimit = -9f;
     private float _justInNegativeLimit = -8.9f;
@@ -50,21 +51,26 @@ public class Player : MonoBehaviour
             Debug.LogError("Canvas couldn't be found");
         }
 
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (_gameManager == null)
+        {
+            Debug.Log("Hey gameManager is null dum dum");
+        }
+
         //making default position of main character
         this.transform.position = new Vector3(0f,-3.14f,0f);
+
+        
 
 
     }
 
     void Update()
     {
-      Movement();
-
-        //firerate
-    if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
-      {
-            FireLaser();
-      }
+        Movement();
+        FireRate();
+    
+    
     }
 
      private void Movement()
@@ -91,7 +97,15 @@ public class Player : MonoBehaviour
 
         transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y,_negativeYLimit, _positveYLimit),0);
 
-} 
+    } 
+    //how often one can fire
+    private void FireRate()
+    {
+         if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+      {
+            FireLaser();
+      }
+    }
      //laser fire to include powerup
     void FireLaser() 
     { 
@@ -126,11 +140,13 @@ public class Player : MonoBehaviour
             {
                 Destroy(gameObject); 
                 _spawnmanager.OnPlayerDeath();
+                _gameManager.GameOver();
+
             }
         }
       
      } 
-
+    //testing purposes
      public void SpeedBoostSecret()
      {
         if (_activeSpeedBoost == true)
@@ -183,7 +199,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(_timerForPowerUps);
         _activeTrippleShot = false;
      }
-    //scoring logic, is  enemies
+    //scoring logic, is passed from enemies using this method
      public void Scored(int points)
      {
         _score += points;

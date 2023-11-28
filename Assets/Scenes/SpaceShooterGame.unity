@@ -463,10 +463,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _laserPrefab: {fileID: 6484691021867522550, guid: ee4ee8c34bbcfe14e82c2a8cfeef84c0, type: 3}
-  _firerate: 0.3
-  _lives: 3
   _tripleShotPowerUp: {fileID: 2021042364579206028, guid: 8759b73ffa256ca4eb3c15cbf9fe37f4, type: 3}
   _shieldVisual: {fileID: 524938536}
+  _firerate: 0.3
+  _lives: 3
   _activeTrippleShot: 0
   _activeSpeedBoost: 0
   _activeShieldPowerUp: 0
@@ -1246,16 +1246,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b56fa5292460f742a7ea1ee906c5e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _restartText: {fileID: 1270100911}
-  _scoreText: {fileID: 1553213302}
   _livesDisplay:
   - {fileID: 21300000, guid: ba53e111f0125654cabfd4eefaf3a657, type: 3}
   - {fileID: 21300000, guid: 80fba5ece7697c44eacc036539c1b552, type: 3}
   - {fileID: 21300000, guid: 482c8e4c0346b704aa5f1760c3c989d5, type: 3}
   - {fileID: 21300000, guid: 9fe6f40efddf0b64fb68a3382b14a4db, type: 3}
+  _restartText: {fileID: 1270100911}
+  _scoreText: {fileID: 1553213302}
   _image: {fileID: 834522046}
   _gameOverText: {fileID: 2100601694}
   _flickerTiming: 0.5
+--- !u!1 &2029627906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2029627908}
+  - component: {fileID: 2029627907}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2029627907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029627906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2206e2537bf0b3e4dbbb7d4f470f5487, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &2029627908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2029627906}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 347.3602, y: 188.12775, z: -0.71238667}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2100601692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1420,14 +1464,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d443a1553f3f6b42822ba67e3aebf80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemy: {fileID: 1338797314995652791, guid: c131c021ed82dc341a6fe6aec500142e, type: 3}
-  _enemyContainer: {fileID: 419782522}
-  _minTime: 3
-  _maxTime: 7
   _powerUps:
   - {fileID: 2688622575290062363, guid: 7c42936a144a1b243a57afecd38743f3, type: 3}
   - {fileID: 2480803950319993150, guid: b13c758b692ef1540a202a2667d1d0a7, type: 3}
   - {fileID: 5214918139986322351, guid: 3d8ea626346a78742873e7d32f9b2248, type: 3}
+  _enemy: {fileID: 1338797314995652791, guid: c131c021ed82dc341a6fe6aec500142e, type: 3}
+  _enemyContainer: {fileID: 419782522}
+  _minTime: 3
+  _maxTime: 7
 --- !u!4 &2107973010
 Transform:
   m_ObjectHideFlags: 0

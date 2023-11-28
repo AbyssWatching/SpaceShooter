@@ -26,11 +26,8 @@ public class UIManager : MonoBehaviour
 
        void Update()
     {
-        //restarts game if it is over
-        if (_gameOverBool == true && Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.LoadScene("SpaceShooterGame");
-        }
+       
+
     }
 
     //updates score
@@ -39,19 +36,24 @@ public class UIManager : MonoBehaviour
         _scoreText.text = "Score: " + score;
     }
 
-    //updates visual of lives and what to do when player dies
+    //updates visual of lives 
     public void updateLives(int currentLives) 
     {
         _image.sprite = _livesDisplay[currentLives];
 
         if (currentLives == 0)
         {
+            GameOverSequence();
+        }
+    }
+    //gameover sequence
+    public void GameOverSequence()
+    {
             _gameOverBool = true;
             _gameOverText.gameObject.SetActive(true);
             _restartText.gameObject.SetActive(true);
 
             StartCoroutine(FlickerSequence());
-        }
     }
     
     // makes the gameover flicker

@@ -19,8 +19,8 @@ public class LaserMovement : MonoBehaviour
        void Update()
     {
         //it's a laser it's going straight up
-        transform.Translate(transform.up * _speed * Time.deltaTime);
-
+       
+        Movement();
         DestroyLaser();
 
     }
@@ -36,6 +36,12 @@ public class LaserMovement : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
+    }
+
+    //it's a laser it's going straight up
+    private void Movement()
+    {
+        transform.Translate(transform.up * _speed * Time.deltaTime);
     }
 }
 

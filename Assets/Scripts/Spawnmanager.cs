@@ -46,7 +46,7 @@ public class Spawnmanager : MonoBehaviour
         yield return new WaitForSeconds(Random.Range(_minTime,_maxTime));
         }
     }
-    //prevents spawning of new GO
+    //prevents spawning of new GO upon death
     public void OnPlayerDeath()
     {
         _stopSpawning = true;
