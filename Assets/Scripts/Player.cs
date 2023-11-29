@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float _speed = 8;
     private UIManager _manager;
     private Spawnmanager _spawnmanager;
-    private GameManager _gameManager;
+   
     private float _canFire = -1f;
     private float _negativeXLimit = -9f;
     private float _justInNegativeLimit = -8.9f;
@@ -51,11 +51,7 @@ public class Player : MonoBehaviour
             Debug.LogError("Canvas couldn't be found");
         }
 
-        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
-        if (_gameManager == null)
-        {
-            Debug.Log("Hey gameManager is null dum dum");
-        }
+
 
         //making default position of main character
         this.transform.position = new Vector3(0f,-3.14f,0f);
@@ -140,7 +136,7 @@ public class Player : MonoBehaviour
             {
                 Destroy(gameObject); 
                 _spawnmanager.OnPlayerDeath();
-                _gameManager.GameOver();
+                
 
             }
         }

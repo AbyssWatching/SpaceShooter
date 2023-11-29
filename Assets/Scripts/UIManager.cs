@@ -15,13 +15,21 @@ public class UIManager : MonoBehaviour
     [SerializeField] private Image _image;
     [SerializeField] private TMP_Text _gameOverText;
     [SerializeField] private float _flickerTiming = .5f;
-    private bool _gameOverBool = false;
+    
     private Player _player;
+     private GameManager _gameManager;
+     private bool _gameOverBool = false;
     // Start is called before the first frame update
     void Start()
     {
         //setting up Score TMP
         _scoreText.text = "Score: " + 0;
+
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        if (_gameManager == null)
+        {
+            Debug.Log("Hey gameManager is null dum dum");
+        }
     }
 
        void Update()
@@ -52,6 +60,7 @@ public class UIManager : MonoBehaviour
             _gameOverBool = true;
             _gameOverText.gameObject.SetActive(true);
             _restartText.gameObject.SetActive(true);
+            _gameManager.GameOver();
 
             StartCoroutine(FlickerSequence());
     }

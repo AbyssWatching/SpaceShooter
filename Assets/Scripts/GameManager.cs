@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     {
            if (_gameOverBool == true && Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.LoadScene("SpaceShooterGame");
+            SceneManager.LoadScene(0);
         }
     }
 }
