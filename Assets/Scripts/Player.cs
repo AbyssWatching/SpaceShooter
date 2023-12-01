@@ -139,6 +139,7 @@ public class Player : MonoBehaviour
                 
 
             }
+            Scored(5);
         }
       
      } 

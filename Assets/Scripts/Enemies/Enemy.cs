@@ -8,6 +8,11 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] private int _speed = 5;
     private Player _player;
+    private Animator _animator;
+    //handle to animator component
+    //nullcheck
+    //assign component to anim
+    //call the anim triger right before destroying GO
     private int _bottomOfScreen = -7;
     private float _topOfScreen = 8.0f;
     private float _maxMinimalXrangeforSPawn = -10.0f;
@@ -21,6 +26,8 @@ public class Enemy : MonoBehaviour
         {
             Debug.LogError("_Player is null in Enemy Script, Thx!");
         }
+
+        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -53,18 +60,31 @@ public class Enemy : MonoBehaviour
         transform.position = new Vector3((UnityEngine.Random.Range(_maxMinimalXrangeforSPawn, _maxMaximalXrangeForSpawn)), _topOfScreen, 0.0f);
     }
 
+    public void EnemyDestroidAnim()
+    {
+        if(_animator != null)
+        {
+            _animator.SetTrigger("OnEnemyDeath");
+            _speed = 0;
+            Destroy(gameObject, 2.8f);
+        }
+    }
+
 	private void OnTriggerEnter2D(Collider2D other)
 	{
         if (other.CompareTag("Laser"))
         {
-           if (_player != null)
-           {
-            _player.Scored(10);
-           }
+            if (_player != null)
+            {
+                _player.Scored(10);
+            }
+
+            _animator.SetTrigger("OnEnemyDeath");
 
             Destroy(other.gameObject);
 
-            Destroy(gameObject);
+            EnemyDestroidAnim();
+            
         }
         else if (other.CompareTag("Player"))
         {
@@ -72,11 +92,10 @@ public class Enemy : MonoBehaviour
             if (player != null)
             {
                 player.Damage();
+                EnemyDestroidAnim();
             }
             else
             {Debug.LogError("Enemy script has a null player ref check ontriggerEnter method first.");}
-
-            Destroy(gameObject);
 
         }
     }

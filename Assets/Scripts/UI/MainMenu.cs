@@ -8,6 +8,8 @@ public class MainMenu : MonoBehaviour
     // Start is called before the first frame update
  public void LoadGame()
  {
+    //one job lol
     SceneManager.LoadScene(0);
  }
+ 
 }
