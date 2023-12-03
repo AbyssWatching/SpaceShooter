@@ -19,14 +19,21 @@ public class Spawnmanager : MonoBehaviour
     void Start()
     {
         //starting the coroutines
+
+
+    }
+
+    //
+    public void StartRound()
+    {
         StartCoroutine(SpawnRoutine());
         StartCoroutine(PowerUpRoutine());
-
     }
 
 //spawns enemies while the player has lives
     IEnumerator SpawnRoutine()
     {
+        yield return new WaitForSeconds(2.5f);
         while (_stopSpawning == false)
         {
             
@@ -38,6 +45,7 @@ public class Spawnmanager : MonoBehaviour
     //spawning of powerups
     IEnumerator PowerUpRoutine()
     {
+        yield return new WaitForSeconds(2.5f);
         while(_stopSpawning == false){
 
         int randomPowerUp = (int)Random.Range(0,3);
