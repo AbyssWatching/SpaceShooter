@@ -13,6 +13,8 @@ public class Player : MonoBehaviour
 
     [SerializeField] private GameObject _tripleShotPowerUp;
     [SerializeField] private GameObject _shieldVisual;
+    [SerializeField] private GameObject _onFirstHit;
+    [SerializeField] private GameObject _onSecondeHit;
     [SerializeField] private float _firerate = 0.5f;
     [SerializeField] private int _lives = 3;
     [SerializeField] private bool _activeTrippleShot = false;
@@ -132,6 +134,14 @@ public class Player : MonoBehaviour
 
             _manager.updateLives(_lives);
 
+            if (_lives <= 2)
+            {
+                _onFirstHit.SetActive(true);
+            }
+            if (_lives <= 1)
+            {
+                _onSecondeHit.SetActive(true);
+            }
             if (_lives <= 0)
             {
                 Destroy(gameObject); 
