@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         WaitForRestart();
+        EscapeGame();
     }
     //just getting info could have used an event
     public void GameOver()
@@ -29,6 +30,16 @@ public class GameManager : MonoBehaviour
            if (_gameOverBool == true && Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene(0);
+        }
+    }
+    private void EscapeGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+            #endif
+            Application.Quit();
         }
     }
 }

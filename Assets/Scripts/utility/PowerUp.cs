@@ -5,7 +5,8 @@ using UnityEngine;
 public class PowerUp : MonoBehaviour
 {
     [SerializeField] private int _speed = 5;
-    [SerializeField] private int PowerUpID;
+    [SerializeField] private int _powerUpID;
+    [SerializeField] private AudioClip _powerUpPickUpSound;
     private int _bottomOfScreen = -7;
 
     // Update is called once per frame
@@ -34,19 +35,23 @@ public class PowerUp : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag("Player"))
         {
+            AudioSource.PlayClipAtPoint(_powerUpPickUpSound,transform.position);
             Player player = other.transform.GetComponent<Player>();
             if (player != null)
             {
-                switch (PowerUpID)
+                switch (_powerUpID)
                 {
                     case 0:
                         player.ActivateTrippleShot();
+                        Debug.Log("Trip shot tripped");
                         break;
                     case 1:
                         player.ActivateSpeedBoost();
+                        Debug.Log("speed boost tripped");
                         break;
                     case 2: 
                         player.ActivateShieldPowerUp();
+                        Debug.Log("Shield tripped");
                         break;
                     default:
                         break;

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Player : MonoBehaviour
+public class Player : MonoBehaviour, IDamagable
 {
     
     private const string HORIZONTAL = "Horizontal";
@@ -23,9 +23,10 @@ public class Player : MonoBehaviour
     [SerializeField] private int _timerForPowerUps = 5;
     [SerializeField] private int _score = 0;
     [SerializeField] private float _speed = 8;
+    [SerializeField] private AudioClip _laserSound;
     private UIManager _manager;
     private Spawnmanager _spawnmanager;
-   
+    private AudioSource _audioSource;
     private float _canFire = -1f;
     private float _negativeXLimit = -9f;
     private float _justInNegativeLimit = -8.9f;
@@ -46,11 +47,23 @@ public class Player : MonoBehaviour
             Debug.LogError("Spawnmanager is null in Player Script, Thx!");
         }
 
+        
         _manager = GameObject.Find("Canvas").GetComponent<UIManager>();
         
         if (_manager == null)
         {
             Debug.LogError("Canvas couldn't be found");
+        }
+        
+        
+        _audioSource = GetComponent<AudioSource>();
+
+        if (_audioSource == null)
+        {
+            Debug.Log("Ain't no audio source on the player, playa");
+        }else
+        {
+            _audioSource.clip = _laserSound;
         }
 
 
@@ -115,7 +128,7 @@ public class Player : MonoBehaviour
         {
             Instantiate(_tripleShotPowerUp, (this.transform.position + new Vector3(-.4f, .9f, 0)), Quaternion.identity);
         }
-
+        _audioSource.Play();
 		_canFire = _firerate + Time.time;
 		
     }
