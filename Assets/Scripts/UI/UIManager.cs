@@ -22,6 +22,7 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Player.onPlayerDeath += GameOverSequence;
         //setting up Score TMP
         _scoreText.text = "Score: " + 0;
 
@@ -30,12 +31,6 @@ public class UIManager : MonoBehaviour
         {
             Debug.Log("Hey gameManager is null dum dum");
         }
-    }
-
-       void Update()
-    {
-       
-            Player.onPlayerDeath += GameOverSequence;
     }
 
     //updates score

@@ -39,6 +39,8 @@ public class Player : MonoBehaviour, IDamagable
 
     public delegate void OnPlayerDeath();
     public static OnPlayerDeath onPlayerDeath;
+    // these are the clasesses listening 
+    //SpawnManager, Player, UiManager
 
     void Start()
     {
