@@ -18,7 +18,7 @@ public class Spawnmanager : MonoBehaviour
 	
     void Start()
     {
-        //starting the coroutines
+        Player.onPlayerDeath += OnPlayerDeath;
 
 
     }

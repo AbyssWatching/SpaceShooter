@@ -10,7 +10,7 @@ public class GameManager : MonoBehaviour
     
     void Start()
     {
-        
+        Player.onPlayerDeath += GameOver;
     }
 
     // Update is called once per frame

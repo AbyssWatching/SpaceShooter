@@ -35,7 +35,7 @@ public class UIManager : MonoBehaviour
        void Update()
     {
        
-
+            Player.onPlayerDeath += GameOverSequence;
     }
 
     //updates score
@@ -49,10 +49,10 @@ public class UIManager : MonoBehaviour
     {
         _image.sprite = _livesDisplay[currentLives];
 
-        if (currentLives == 0)
-        {
-            GameOverSequence();
-        }
+        // if (currentLives == 0)
+        // {
+        //     GameOverSequence();
+        // }
     }
     //gameover sequence
     public void GameOverSequence()

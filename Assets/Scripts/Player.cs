@@ -37,6 +37,9 @@ public class Player : MonoBehaviour, IDamagable
     private float _defaultSpeed = 8;
     private float _speedBoostSpeed = 16;
 
+    public delegate void OnPlayerDeath();
+    public static OnPlayerDeath onPlayerDeath;
+
     void Start()
     {
         //null check and finding scripts
@@ -65,6 +68,8 @@ public class Player : MonoBehaviour, IDamagable
         {
             _audioSource.clip = _laserSound;
         }
+
+        onPlayerDeath += PlayerDeath;
 
 
 
@@ -155,9 +160,9 @@ public class Player : MonoBehaviour, IDamagable
             {
                 _onSecondeHit.SetActive(true);
             }
-            if (_lives <= 0)
+            if (_lives <= 0 && onPlayerDeath != null)
             {
-                Destroy(gameObject); 
+                onPlayerDeath?.Invoke();
                 _spawnmanager.OnPlayerDeath();
                 
 
@@ -166,6 +171,11 @@ public class Player : MonoBehaviour, IDamagable
         }
       
      } 
+
+     public void PlayerDeath()
+     {
+        Destroy(gameObject);
+     }
     //testing purposes
      public void SpeedBoostSecret()
      {
